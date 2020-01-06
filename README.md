@@ -1,2 +1,2 @@
-# TOP_RPS
-The Odin Project - Rock Paper Scissors Javascript Code
+This is my Rock Paper Scissors JavaScript Program for The Odin Project
+
