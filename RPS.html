@@ -9,17 +9,31 @@
   <p></p>
 
   <script>
-     function capitalize(text) {
-       let y = text.toLowerCase();
-       let x = y.charAt(0).toUpperCase();
-       let n = y.replace(y.charAt(0), y.charAt(0).toUpperCase());
-       return n;
+     function computerPlay() {
+        var choices = ["Rock", "Paper", "Scissor"];
+        var x = Math.floor(Math.random()*choices.length);
+        return choices[x];
      }
-     
-     function lastLetter(word) {
-       let y = word.length;
-       return word.charAt((y - 1));
+
+     function playRound(playerSelection, computerSelection) {
+        let y = playerSelection.toLowerCase();
+        let x = y.charAt(0).toUpperCase();
+        let playerSelect = y.replace(y.charAt(0), y.charAt(0).toUpperCase());
+        
+        if (playerSelect == 'Rock' && compSelection == 'Scissor') {
+           return "You Win! Rock beats Scissor";
+        } else if (playerSelect == 'Paper' && compSelection == 'Rock') {
+           return "You Win! Paper beats Rock";
+        } else if (playerSelect == 'Scissor' && compSelection == 'Paper') {
+           return "You Win! Scissor beats Paper";
+        } else {
+           return "You lose Bitch!"
+        }
      }
+
+const playerSelection = 'rock'
+const compSelection = computerPlay();
+console.log(playRound(playerSelection, compSelection))
 
   </script>
 </body>
