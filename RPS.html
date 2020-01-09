@@ -9,32 +9,74 @@
   <p></p>
 
   <script>
-     function computerPlay() {
-        var choices = ["Rock", "Paper", "Scissor"];
-        var x = Math.floor(Math.random()*choices.length);
-        return choices[x];
-     }
 
+     // Code and function to determine computers hand:
+     let choice = ["Rock", "Paper","Scissors"]; // list of choices available to comp
+
+     // function to take array of choices and randomly select one
+     function computerPlay(choice) {
+        return choice[Math.floor(Math.random()*choice.length)]; 
+     }
+   
+
+
+     /* 
+     Function to play a round of Rock Paper Scissors:
+     Takes input playerSelection (user defined) and computerSelection (random function)
+     It will then determine a winner or tie or invalid based on the criteria below
+     */
      function playRound(playerSelection, computerSelection) {
-        let y = playerSelection.toLowerCase();
+         if(playerSelection == ("Rock" || "Paper" || "Scissors") 
+            && playerSelection !== computerSelection) { 
+            /*
+            If the player selection is valid and is not the same as the computer's
+            selection then the following switch statement will run to compare hands
+            and determine if user wins or loses
+            */
+            switch (playerSelection + "vs" + computerSelection) {
+               case ("RockvsScissors"):
+                  return "You Win, Rock beats Scissors!";
+                  break;
+               case("RockvsPaper"):
+                  return "You lose, Paper beats Rock!";
+                  break;
+               case("PapervsRock"):
+                  return "You Win, Paper beats Rock!";
+                  break;
+               case("PapervsScissors"):
+                  return "You lose, Scissors beats Paper!";
+                  break;
+               case("ScissorsvsPaper"):
+                  return "You win, Scissors beats Paper!";
+                  break;
+               case("ScissorsvsRock"):
+                  return "You lose, Rock beats Scissors";
+                  break;
+            }
+         } else if(playerSelection == computerSelection) {
+            return "You tied with the computer, impressive really"
+         } else {
+            return "Please input an actual choice, sir";
+         }
+      }
+
+     // We're going to define the user input here:
+     let userInput = "rock"
+
+     // Function to standardize userInput to match nomenclature of computer
+     // Outputs playerSelection string with the first letter capitalized
+     // This will match it to the computers input and allow for easy comparison
+     function standardize(userInput) {
+        let y = userInput.toLowerCase();
         let x = y.charAt(0).toUpperCase();
-        let playerSelect = y.replace(y.charAt(0), y.charAt(0).toUpperCase());
-        
-        if (playerSelect == 'Rock' && compSelection == 'Scissor') {
-           return "You Win! Rock beats Scissor";
-        } else if (playerSelect == 'Paper' && compSelection == 'Rock') {
-           return "You Win! Paper beats Rock";
-        } else if (playerSelect == 'Scissor' && compSelection == 'Paper') {
-           return "You Win! Scissor beats Paper";
-        } else {
-           return "You lose Bitch!"
-        }
+        return y.replace(y.charAt(0), y.charAt(0).toUpperCase());
      }
 
-const playerSelection = 'rock'
-const compSelection = computerPlay();
-console.log(playRound(playerSelection, compSelection))
+     // The playerSelection will now be the user input in correct nomenclature
+     const playerSelection = standardize(userInput);
+     const computerSelection = computerPlay(choice);
 
+      
   </script>
 </body>
 </html>
