@@ -17,7 +17,23 @@
      function computerPlay(choice) {
         return choice[Math.floor(Math.random()*choice.length)]; 
      }
-   
+     
+     // We're going to define the user input here:
+     let userInput = window.prompt("Please enter you hand choice!", "rock");
+
+     // Function to standardize userInput to match nomenclature of computer
+     // Outputs playerSelection string with the first letter capitalized
+     // This will match it to the computers input and allow for easy comparison
+     function standardize(userInput) {
+        let y = userInput.toLowerCase();
+        let x = y.charAt(0).toUpperCase();
+        return y.replace(y.charAt(0), y.charAt(0).toUpperCase());
+     }
+
+     // The playerSelection will now be the user input in correct nomenclature
+     const playerSelection = standardize(userInput);
+     const computerSelection = computerPlay(choice);
+      
 
 
      /* 
@@ -26,7 +42,7 @@
      It will then determine a winner or tie or invalid based on the criteria below
      */
      function playRound(playerSelection, computerSelection) {
-         if(playerSelection == ("Rock" || "Paper" || "Scissors") 
+         if(playerSelection == ("Rock" || playerSelection == "Paper" || playerSelection == "Scissors") 
             && playerSelection !== computerSelection) { 
             /*
             If the player selection is valid and is not the same as the computer's
@@ -60,21 +76,7 @@
          }
       }
 
-     // We're going to define the user input here:
-     let userInput = "rock"
-
-     // Function to standardize userInput to match nomenclature of computer
-     // Outputs playerSelection string with the first letter capitalized
-     // This will match it to the computers input and allow for easy comparison
-     function standardize(userInput) {
-        let y = userInput.toLowerCase();
-        let x = y.charAt(0).toUpperCase();
-        return y.replace(y.charAt(0), y.charAt(0).toUpperCase());
-     }
-
-     // The playerSelection will now be the user input in correct nomenclature
-     const playerSelection = standardize(userInput);
-     const computerSelection = computerPlay(choice);
+     
 
       
   </script>
