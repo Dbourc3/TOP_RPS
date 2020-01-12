@@ -7,6 +7,7 @@
 </head>
 <body>
   <p></p>
+  <input type="button" value="Start Game" onclick="game()" >
 
   <script>
 
@@ -19,7 +20,7 @@
      }
      
      // We're going to define the user input here:
-     let userInput = window.prompt("Please enter you hand choice!", "rock");
+      let userInput = window.prompt("Please enter you hand choice!", "rock");
 
      // Function to standardize userInput to match nomenclature of computer
      // Outputs playerSelection string with the first letter capitalized
@@ -52,33 +53,21 @@
             switch (playerSelection + "vs" + computerSelection) {
                case ("RockvsScissors"):
                   return "You Win, Rock beats Scissors!";
-                  n++;
-                  p++;
                   break;
                case("RockvsPaper"):
                   return "You lose, Paper beats Rock!";
-                  n++;
-                  c++;
                   break;
                case("PapervsRock"):
                   return "You Win, Paper beats Rock!";
-                  n++;
-                  p++;
                   break;
                case("PapervsScissors"):
                   return "You lose, Scissors beats Paper!";
-                  n++;
-                  c++;
                   break;
                case("ScissorsvsPaper"):
                   return "You win, Scissors beats Paper!";
-                  n++;
-                  p++;
                   break;
                case("ScissorsvsRock"):
                   return "You lose, Rock beats Scissors";
-                  n++;
-                  c++;
                   break;
             }
          } else if(playerSelection == computerSelection) {
@@ -88,22 +77,87 @@
          }
       }
 
-      function game() {
-         var n = 1;
-         var p = 0;
-         var c = 0;
+   // The following JavaScript Coding is for the Game portion of the RPS Project
 
-         while (n <= 5) {
-            console.log(playRound(playerSelection, computerSelection));
-            let userInput = window.prompt("Please enter you hand choice!", "rock");
+   // First I am going to redefine the playRound function in order to make it 
+   // more friendly for counting wins and losses in for loop
+   function playRoundGame(playerSelection, computerSelection) {
+
+         if((playerSelection == "Rock" || playerSelection == "Paper" || playerSelection == "Scissors") 
+            && (playerSelection !== computerSelection)) { 
+            /*
+            If the player selection is valid and is not the same as the computer's
+            selection then the following switch statement will run to compare hands
+            and determine if user wins or loses
+            */
+            switch (playerSelection + "vs" + computerSelection) {
+               case ("RockvsScissors"):
+                  return "You win";
+                  break;
+               case("RockvsPaper"):
+                  return "You lose";
+                  break;
+               case("PapervsRock"):
+                  return "You win";
+                  break;
+               case("PapervsScissors"):
+                  return "You lose";
+                  break;
+               case("ScissorsvsPaper"):
+                  return "You win";
+                  break;
+               case("ScissorsvsRock"):
+                  return "You lose";
+                  break;
             }
-         return "Game Over";
-         if (p > c) {
-            return "You win"
+         } else if(playerSelection == computerSelection) {
+            return "You tie"
          } else {
-            return "You lose"
+            return "Please input an actual choice, sir";
          }
       }
+
+
+
+      function game() {
+         let playerScore = 0; // Initializing player score to 0.
+         let computerScore = 0; // Initializing computer score to 0.
+         let i = 1;
+         while (i <=5 ) {
+            // Code and function to determine computers hand:
+            let choice = ["Rock", "Paper","Scissors"]; // list of choices available to comp
+
+            // We're going to define the user input here:
+            let userInput = window.prompt("Please enter you hand choice!", "rock");
+
+            // The playerSelection will now be the user input in correct nomenclature 
+            const playerSelection = standardize(userInput);
+            const computerSelection = computerPlay(choice);
+            result = playRoundGame(playerSelection, computerSelection);
+            console.log(result);
+            if (result == "You win") {
+               playerScore+=1;
+               i++;
+               console.log("You have " + playerScore + " points and the computer has " + computerScore + " points.")
+            } else if (result == "You lose") {
+               computerScore+=1;
+               i++;
+               console.log("You have " + playerScore + " points and the computer has " + computerScore + " points.");
+            } else {
+               playerScore+=0;
+               computerScore+=0;
+            }
+         }
+
+         if (playerScore > computerScore) {
+            console.log("You win the game!")
+         } else if(computerScore > playerScore) {
+            console.log("You lose the game")
+         }
+
+      }
+
+      
      
 
       
